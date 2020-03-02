@@ -4,13 +4,14 @@
 #include <wifi.h>
 #include <mqtt.h>
 
+long lastMsg = 0;
 
 void setup() {
   Serial.begin(115200);
 
   Serial.println("Setting up pins.");
   // put your setup code here, to run once:
-
+  setupPins();
   setupWifi();
   setupMqtt();
 }
@@ -19,21 +20,21 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   if (!WiFi.isConnected()) {
-    setupWifi();
+   setupWifi();
   }
   if (!client.connected()) {
-    reconnectMqtt();
+   reconnectMqtt();
   }
 
   client.loop();
 
   long now = millis();
   if (!digitalRead(BTN_PIN) && now - lastMsg > 200) {
-    lastMsg = now;
+   lastMsg = now;
 
-    Serial.println("Publish message: toggle [1]");
-    client.publish("toggle", "1");
-    client.publish("toggle1", "1");
-    client.publish("toggle2", "1");
+   Serial.println("Publish message: toggle [1]");
+   client.publish("toggle", "1");
+   client.publish("toggle1", "1");
+   client.publish("toggle2", "1");
   }
 }

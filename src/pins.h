@@ -1,5 +1,8 @@
 #include <Arduino.h>
 
+#ifndef PINSh
+#define PINSh
+
 #define LED_PIN 2
 #define LED1_PIN 14
 #define LED2_PIN 12
@@ -18,3 +21,4 @@ void setupPins() {
 
   pinMode(BTN_PIN, INPUT_PULLUP);
 }
+#endif

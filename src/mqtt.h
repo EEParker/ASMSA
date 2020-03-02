@@ -1,11 +1,11 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <pins.h>
 
 const char *mqtt_server = "10.0.60.1";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-long lastMsg = 0;
 
 void messageRx(char* topic, byte* payload, unsigned int length);
 void reconnectMqtt();
